@@ -18,6 +18,8 @@ public class WynntilsConfigSharing implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		if (!FabricLoader.getInstance().isModLoaded("wynntils"))
+			return;
 		UUID uuid = MinecraftClient.getInstance().getSession().getUuidOrNull();
 		Path wynntils = FabricLoader.getInstance().getConfigDir().resolve("wynntils-config-sharing/wynntils.json");
 		Path configPath = FabricLoader.getInstance().getConfigDir().resolve("wynntils-config-sharing/config.json");
