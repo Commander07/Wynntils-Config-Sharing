@@ -50,9 +50,13 @@ public class WynntilsConfigSharing implements ModInitializer {
 				Files.createDirectories(toBeOverwritten.getParent());
 				Files.createFile(toBeOverwritten);
 			}
+            byte[] backup = Files.readAllBytes(toBeOverwritten);
 			Files.write(toBeOverwritten, bytes);
-			LOGGER.info("Overwrote: {}", toBeOverwritten);
-		} catch (IOException e) {
+            Files.write(toBeOverwritten.resolveSibling(
+                    toBeOverwritten.getFileName() + ".bak"
+            ), backup);
+            LOGGER.info("Overwrote: {}", toBeOverwritten);
+        } catch (IOException e) {
 			LOGGER.error("Failed to overwrite config!");
 		}
 	}
